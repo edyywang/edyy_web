@@ -39,3 +39,9 @@ Vue D3
 
 ## test AirBnB Superset js
 Superset
+
+## test Axios & Lodash for Ajax API
+need to find a public API for testing like google DNS
+
+## test Google Map API
+google map API

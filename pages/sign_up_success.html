@@ -1,9 +1,15 @@
 <HTML>
 	<HEAD>
 		<TITLE>edyy web testing</TITLE>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script>
+			$(function(){
+				$("#load_js").load("../pages/load_js.html");
+			});
+		</script>
 	</HEAD>
 	<BODY>
-		<script type="text/javascript" src="../js/tag_manager_head.js"></script>
+		<div id="load_js"></div>
 		<h1>Sign-up success page</h2>
 		<a href="../">back to Index page</a>
 	</BODY>

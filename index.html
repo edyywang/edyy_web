@@ -9,8 +9,21 @@
 		<script type="text/javascript" src="js/tag_manager_head.js"></script>
 		<h1>Landing page</h1>
 		<p>some landing page content ...... </p>
-		<a href="pages/sign_up_1.html">Sign Up 1 page</a>
-		<br>
-		<a href="pages/sign_up_2.html">Sign Up 2 page</a>
+		<ul style="list-style-type:none">
+			<li>
+				<p>Sign Up 1</p>
+				<ul>
+					<li><form action="pages/sign_up_1.html"><input type="submit" value="Sign Up 1"></form></li>
+					<li><a href="pages/sign_up_1.html">Sign Up 1</a></li>
+				</ul>
+			</li>
+			<li>
+				<p>Sign Up 2</p>
+				<ul>
+					<li><button onclick="window.location.href='pages/sign_up_2.html'">Sign Up 2</button></li>
+					<li><a href="pages/sign_up_2.html"><img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678110-sign-info-128.png" title="test image title" alt="test image alt"></a></li>
+				</ul>
+			</li>
+		</ul>
 	</body>
 </html>

@@ -45,12 +45,12 @@
 				})
 				window.location.href='sign_up_2.html';
 			}
-			function event_sign_up_2_img(){
+			function event_sign_up_2_img(event){
 				dataLayer.push({
 					event: 'event_sign_up',
 					ga_event_category: 'sign_up',
 					ga_event_action: 'event_sign_up_2_img',
-					ga_event_label: 'sign_up_2_img',
+					ga_event_label: event.target.href,
 					ga_event_value: 0
 				});
 			}

@@ -35,7 +35,7 @@
 					ga_event_value: 0
 				});
 			}
-			function sign_up_1_text(event){
+			function sign_up_1_text(e){
 				dataLayer.push({
 					event: 'event_sign_up',
 					ga_event_category: 'sign_up',
@@ -44,22 +44,22 @@
 					ga_event_value: 0
 				});
 			}
-			function event_sign_up_2_btn(event){
+			function event_sign_up_2_btn(e){
 				dataLayer.push({
 					event: 'event_sign_up',
 					ga_event_category: 'sign_up',
 					ga_event_action: 'event_sign_up_2_btn',
-					ga_event_label: event.type,
+					ga_event_label: e.type,
 					ga_event_value: 0
 				})
 				window.location.href='sign_up_2.html';
 			}
-			function event_sign_up_2_img(event){
+			function event_sign_up_2_img(e){
 				dataLayer.push({
 					event: 'event_sign_up',
 					ga_event_category: 'sign_up',
 					ga_event_action: 'event_sign_up_2_img',
-					ga_event_label: event.target,
+					ga_event_label: e.target,
 					ga_event_value: 0
 				});
 			}

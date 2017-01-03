@@ -9,9 +9,8 @@
 		<script type="text/javascript" src="../../js/tag_manager_head.js"></script>
 		<h1>Sign Up Success page</h1>
 		<a href="landing.html">back to Index page</a>
-	</body>
-	<script type="text/javascript">
-		$(document).ready(function(){
+		<script type="text/javascript">
+			$(document).ready(function(){
 				dataLayer.push({
 					event: 'event_sign_up',
 					ga_event_category: 'sign_up_success',
@@ -19,11 +18,12 @@
 					ga_event_label: 'sign_up_success',
 					ga_event_value: 10
 				});
-		});
-		var greeting = function (name) {
-			var val = "HaHa!! ";
-    	console.log(val + "Great to see you," + " " + name);
-		};
-		console.log("Hey"+" "+"you" + greeting("ed"));
-	</script>
+				var greeting = function(name) {
+					var val = "HaHa!! ";
+					console.log(val + "Great to see you," + " " + name);
+				};
+				console.log("Hey"+" "+"you" + greeting("ed"));
+			});
+		</script>
+	</body>
 </html>

@@ -10,5 +10,28 @@
 		<h1>Sign Up 1 page</h1>
 		<p>some introduction on page 1 plus a sign-up form </p>
 		<a href="sign_up_success.html">Sign-Up Success page</a>
+		<form id="sign_up_form" action="sign_up_success.html" method="get">
+			Name: <br>
+			<input type="text" name="name" id="form_name"><br>
+			Email: <br>
+			<input type="email" name="email" id="form_email"><br>
+			Password <br>
+			<input type="password" name="password" id="form_password"><br>
+			<br>
+			<input type="submit" value="Submit">
+		</form>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("form#sign_up_form").on('submit', function(e){
+					dataLayer.push({
+						event: 'event_sign_up',
+						ga_event_category: 'sign_up_form_1',
+						ga_event_action: document.getElementById('form_name').value,
+						ga_event_label: document.getElementById('form_email').value,
+						ga_event_value: 4
+					});
+				});
+			});
+		</script>
 	</body>
 </html>

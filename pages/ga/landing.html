@@ -14,7 +14,7 @@
 				<p>Sign Up 1</p>
 				<ul>
 					<li><form action="sign_up_1.html"><input type="submit" value="Sign Up 1"></form></li>
-					<li><a href="sign_up_1.html" onclick="event_sign_up_1_text">Sign Up 1</a></li>
+					<li><a href="sign_up_1.html" onclick="dataLayer.push({event: 'event_sign_up', ga_event_category: 'sign_up', ga_event_action: 'event_sign_up_1_text', ga_event_label: 'sign_up_1', ga_event_value: 0});">Sign Up 1</a></li>
 				</ul>
 			</li>
 			<li>
@@ -26,15 +26,6 @@
 			</li>
 		</ul>
 		<script type="text/javascript">
-			function event_sign_up_1_text(event){
-				dataLayer.push({
-          event: 'event_sign_up',
-          ga_event_category: 'sign_up',
-          ga_event_action: 'event_sign_up_1_text',
-          ga_event_label: 'sign_up_1',
-					ga_event_value: 0
-        });
-			}
 			function event_sign_up_2_btn(event){
 				dataLayer.push({
 					event: 'event_sign_up',
@@ -42,8 +33,8 @@
 					ga_event_action: 'event_sign_up_2_btn',
 					ga_event_label: 'sign_up_2',
 					ga_event_value: 0
-				});
-				window.location.href='sign_up_2.html'
+				})
+				window.location.href='sign_up_2.html';
 			}
 			function event_sign_up_2_img(event){
 				dataLayer.push({

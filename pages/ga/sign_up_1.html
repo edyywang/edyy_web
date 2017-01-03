@@ -8,7 +8,7 @@
 	<body>
 		<script type="text/javascript" src="../../js/tag_manager_head.js"></script>
 		<h1>Sign Up 1 page</h1>
-		<p>some introduction on page 1 plus a sign-up form </p>
+		<p id="explain_text">some introduction on page 1 plus a sign-up form </p>
 		<a href="sign_up_success.html">Sign-Up Success page</a>
 		<form id="sign_up_form" action="sign_up_success.html" method="get">
 			Name: <br>
@@ -30,6 +30,7 @@
 						ga_event_label: document.getElementById('form_email').value,
 						ga_event_value: 4
 					});
+					$('p#explain_text').fadeOut('fast');
 				});
 			});
 		</script>

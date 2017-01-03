@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>edyy web testing</title>
+		<link rel="stylesheet" href="style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	</head>
 	<body>
@@ -10,5 +11,32 @@
 		<h1>Sign Up 2 page</h1>
 		<p>some introduction on page 2 plus a sign-up form </p>
 		<a href="sign_up_success.html">Sign-Up Success page</a>
+		<br>
+		<div>
+			<div class="block red"></div>
+			<div class="block blue"></div>
+			<div class="block yellow"></div>
+			<div class="block green"></div>
+		</div>
+		<br>
+		<div>
+			<button id="show_message">Show Message</button>
+			<br>
+			<div id="message"></div>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('button#show_message').click(function(){
+					$('div#message').append("<p>Show Message Success</p>");
+				});
+				dataLayer.push({
+					event: 'event_sign_up',
+					ga_event_category: 'sign_up_form_2',
+					ga_event_action: document.getElementById('button#show_message').value,
+					ga_event_label: document.getElementById('div#message').value,
+					ga_event_value: 4
+				});
+			});
+		</script>
 	</body>
 </html>

@@ -13,7 +13,7 @@
 			<li>
 				<p>Sign Up 1</p>
 				<ul>
-					<li><form action="sign_up_1.html"><input type="submit" value="Sign Up 1"></form></li>
+					<li><form action="sign_up_1.html" onsubmit="sign_up_1_form()"><input type="submit" value="Sign Up 1"></form></li>
 					<li><a href="sign_up_1.html" onclick="sign_up_1_text()">Sign Up 1</a></li>
 				</ul>
 			</li>
@@ -26,6 +26,15 @@
 			</li>
 		</ul>
 		<script type="text/javascript">
+			function sign_up_1_form(){
+				dataLayer.push({
+					event: 'event_sign_up',
+					ga_event_category: 'sign_up',
+					ga_event_action: 'event_sign_up_1_form',
+					ga_event_label: 'sign_up_1_form',
+					ga_event_value: 0
+				});
+			}
 			function sign_up_1_text(){
 				dataLayer.push({
 					event: 'event_sign_up',
@@ -45,12 +54,12 @@
 				})
 				window.location.href='sign_up_2.html';
 			}
-			function event_sign_up_2_img(event){
+			function event_sign_up_2_img(){
 				dataLayer.push({
 					event: 'event_sign_up',
 					ga_event_category: 'sign_up',
 					ga_event_action: 'event_sign_up_2_img',
-					ga_event_label: event.target.href,
+					ga_event_label: 'sign_up_2_img',
 					ga_event_value: 0
 				});
 			}

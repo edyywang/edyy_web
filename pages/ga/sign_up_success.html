@@ -10,4 +10,15 @@
 		<h1>Sign Up Success page</h1>
 		<a href="landing.html">back to Index page</a>
 	</body>
+	<script type="text/javascript">
+		$(document).ready(function(){
+				dataLayer.push({
+					event: 'event_sign_up',
+					ga_event_category: 'sign_up_success',
+					ga_event_action: 'sign_up_success',
+					ga_event_label: 'sign_up_success',
+					ga_event_value: 10
+				});
+		});
+	</script>
 </html>

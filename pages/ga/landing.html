@@ -13,25 +13,25 @@
 			<li>
 				<p>Sign Up 1</p>
 				<ul>
-					<li><form action="sign_up_1.html" onsubmit="sign_up_1_form(event)"><input type="submit" value="Sign Up 1"></form></li>
-					<li><a href="sign_up_1.html" onclick="sign_up_1_text(event)">Sign Up 1</a></li>
+					<li><form action="sign_up_1.html" onsubmit="sign_up_1_form(e)"><input type="submit" value="Sign Up 1"></form></li>
+					<li><a href="sign_up_1.html" onclick="sign_up_1_text(e)">Sign Up 1</a></li>
 				</ul>
 			</li>
 			<li>
 				<p>Sign Up 2</p>
 				<ul>
-					<li><button onclick="event_sign_up_2_btn(event)">Sign Up 2</button></li>
-					<li><a href="sign_up_2.html" onclick="event_sign_up_2_img(event)"><img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678110-sign-info-128.png" title="test image title" alt="test image alt"></a></li>
+					<li><button onclick="event_sign_up_2_btn(e)">Sign Up 2</button></li>
+					<li><a href="sign_up_2.html" onclick="event_sign_up_2_img(e)"><img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678110-sign-info-128.png" title="test image title" alt="test image alt"></a></li>
 				</ul>
 			</li>
 		</ul>
 		<script type="text/javascript">
-			function sign_up_1_form(event){
+			function sign_up_1_form(e){
 				dataLayer.push({
 					event: 'event_sign_up',
 					ga_event_category: 'sign_up',
 					ga_event_action: 'event_sign_up_1_form',
-					ga_event_label: event.target.href,
+					ga_event_label: e.srcElement,
 					ga_event_value: 0
 				});
 			}
@@ -40,7 +40,7 @@
 					event: 'event_sign_up',
 					ga_event_category: 'sign_up',
 					ga_event_action: 'event_sign_up_1_text',
-					ga_event_label: event.target,
+					ga_event_label: $(e.srcElement).closest('a').data('href'),
 					ga_event_value: 0
 				});
 			}
@@ -49,7 +49,7 @@
 					event: 'event_sign_up',
 					ga_event_category: 'sign_up',
 					ga_event_action: 'event_sign_up_2_btn',
-					ga_event_label: event,
+					ga_event_label: event.type,
 					ga_event_value: 0
 				})
 				window.location.href='sign_up_2.html';
@@ -59,7 +59,7 @@
 					event: 'event_sign_up',
 					ga_event_category: 'sign_up',
 					ga_event_action: 'event_sign_up_2_img',
-					ga_event_label: 'sign_up_2_img',
+					ga_event_label: event.target,
 					ga_event_value: 0
 				});
 			}

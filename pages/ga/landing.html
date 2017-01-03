@@ -14,20 +14,46 @@
 				<p>Sign Up 1</p>
 				<ul>
 					<li><form action="sign_up_1.html"><input type="submit" value="Sign Up 1"></form></li>
-					<li><a href="sign_up_1.html">Sign Up 1</a></li>
+					<li><a href="sign_up_1.html" onclick="event_sign_up_1_text">Sign Up 1</a></li>
 				</ul>
 			</li>
 			<li>
 				<p>Sign Up 2</p>
 				<ul>
-					<li><button onclick="window.location.href='sign_up_2.html'">Sign Up 2</button></li>
-					<li><a href="sign_up_2.html"><img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678110-sign-info-128.png" title="test image title" alt="test image alt"></a></li>
+					<li><button onclick="event_sign_up_2_btn">Sign Up 2</button></li>
+					<li><a href="sign_up_2.html" onclick="event_sign_up_2_img"><img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678110-sign-info-128.png" title="test image title" alt="test image alt"></a></li>
 				</ul>
 			</li>
 		</ul>
 		<script type="text/javascript">
-			
-
+			function event_sign_up_1_text(event){
+				dataLayer.push({
+          event: 'event_sign_up',
+          ga_event_category: 'sign_up',
+          ga_event_action: 'event_sign_up_1_text',
+          ga_event_label: 'sign_up_1',
+					ga_event_value: 0
+        });
+			}
+			function event_sign_up_2_btn(event){
+				dataLayer.push({
+					event: 'event_sign_up',
+					ga_event_category: 'sign_up',
+					ga_event_action: 'event_sign_up_2_btn',
+					ga_event_label: 'sign_up_2',
+					ga_event_value: 0
+				});
+				window.location.href='sign_up_2.html'
+			}
+			function event_sign_up_2_img(event){
+				dataLayer.push({
+					event: 'event_sign_up',
+					ga_event_category: 'sign_up',
+					ga_event_action: 'event_sign_up_2_img',
+					ga_event_label: 'sign_up_2',
+					ga_event_value: 0
+				});
+			}
 		</script>
 	</body>
 </html>

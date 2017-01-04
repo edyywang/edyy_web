@@ -3,12 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title>test Vue JS</title>
-  <!-- javascript library -->
+  <!-- javascript library jQuery 30kb Vue 27kb Axios 5kb-->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>  -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script> <!-- Vue 27kb -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script> <!-- Axios 5kb -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script> -->
 </head>
 <body>
   <h1>test Vue JS</h1><br>
-
+  <p v-if="show">This will show</p>
+  <p v-show="show">This will show</p>
+  <li v-for="user in users">{{user.name}}</li>
+  <div id="app">
+    <my_component></my_component>
+  </div>
+  <script>
+    Var app = new Vue({
+      el: '#some-id',
+      data: {
+        msg: 'hello world'!
+      }
+    });
+    Var ptag = new Vue({
+      data: {
+        show: true,
+        users: [
+          { name: 'Bob'},
+          { name: 'Kathy'}
+        ]
+      }
+    });
+    Vue.component ('my_component', {template: 'This is my template'})
+  </script>
 </body>
 </html>

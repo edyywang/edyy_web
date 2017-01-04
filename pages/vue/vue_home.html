@@ -10,29 +10,31 @@
 </head>
 <body>
   <h1>test Vue JS</h1><br>
-  <p v-if="show">This will show</p>
+  <div id="app">{{ message }}</div>
+  <!-- <p v-if="show">This will show</p>
   <p v-show="show">This will show</p>
   <li v-for="user in users">{{user.name}}</li>
-  <div id="app">
+  <div id="xyz">
     <my_component></my_component>
-  </div>
+  </div> -->
   <script>
-    Var app = new Vue({
-      el: '#some-id',
+    var app = new Vue({
+      el: '#app',
       data: {
-        msg: 'hello world'!
+        message: 'Hello World!'
       }
     });
-    Var ptag = new Vue({
-      data: {
-        show: true,
-        users: [
-          { name: 'Bob'},
-          { name: 'Kathy'}
-        ]
-      }
-    });
-    Vue.component ('my_component', {template: 'This is my template'})
+    // Var ptag = new Vue({
+    //   el: 'p'
+    //   data: {
+    //     show: true,
+    //     users: [
+    //       { name: 'Bob'},
+    //       { name: 'Kathy'}
+    //     ]
+    //   }
+    // });
+    // Vue.component ('my_component', {template: 'This is my template'})
   </script>
 </body>
 </html>

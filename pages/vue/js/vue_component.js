@@ -216,12 +216,11 @@ var component4 = new Vue({
   }
 });
 // component sample: custom events
+// 參考子物件emit資料到父instance的方法
+// https://laracasts.com/discuss/channels/vue/how-to-catch-a-childs-emit-in-the-parent-with-vue?page=1
 Vue.component('coupon', {
-  // props: {
-  //   couponCode: { type: String }
-  // },
   data(){
-    return { couponCodeData: '' }
+    return { couponCodeData: '' } //物件自己bind自己的資料, 用data為setter, 不需要設定props
   },
   template: `
     <input type="text" placeholder="Enter your coupon code" @blur="onCouponApplied" v-model="couponCodeData">
@@ -229,24 +228,20 @@ Vue.component('coupon', {
   methods: {
     onCouponApplied(){
       //發射event上一層去時就要使用$emit 並且可以傳送一個物件
-      //發射一個custom event叫做 coupon-was-applied (標準的event有像是click或是keyup)
-      this.$emit('coupon-was-applied');
+      //發射一個custom event叫做 coupon-was-applied到DOM去 (標準的event有像是click或是keyup)
+      //在$emit客製化event時, 也能傳送一組arrry的資料, 會bind到父instance的方法去
+      this.$emit('coupon-was-applied', [this.couponCodeData, 'xyz']);
     }
-  },
-  // mounted() {
-  //   this.couponCodeData = this.couponCode;
-  // }
+  }
 });
 var component5 = new Vue({
   el: '#component-custom-event',
   data: {
-    couponCode: '',
     couponResult: ''
   },
   methods: {
-    onCouponApplied(){
-      this.couponCode = 'abc'
-      this.couponResult = this.couponCode + ' was applied!'
+    onCouponApplied(couponCodeData){ // couponCodeData 是從子物件emit傳出來的資料
+      this.couponResult = couponCodeData[0] + ' was applied! ' + couponCodeData[1]
     }
   }
 });

@@ -52,6 +52,7 @@
   <h3>Component - Customer Event</h3>
   <div id="component-custom-event">
     <!-- v-on:applied 或 @applied 是用來母子物件溝通的 -->
+    <!-- custom event叫做 coupon-was-applied 被子物件呼叫觸發後, 呼叫父instance的方法 -->
     <coupon @coupon-was-applied="onCouponApplied"></coupon>
     <p>{{ couponResult }}</p>
   </div>

@@ -55,6 +55,12 @@
     <!-- custom event叫做 coupon-was-applied 被子物件呼叫觸發後, 呼叫父instance的方法 -->
     <coupon @coupon-was-applied="onCouponApplied"></coupon>
     <p>{{ couponResult }}</p>
+    <p v-show="showCouponDetail">Show Coupon Detail Data as below</p>
+  </div>
+  <hr>
+  <h3>Component - Event Dispatcher</h3>
+  <div id="component-event-dispatcher">
+
   </div>
   <script type="text/javascript" src="js/vue_component.js"></script>
 </body>

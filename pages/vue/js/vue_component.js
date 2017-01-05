@@ -237,12 +237,23 @@ Vue.component('coupon', {
 var component5 = new Vue({
   el: '#component-custom-event',
   data: {
-    couponResult: ''
+    couponResult: '',
+    showCouponDetail: false
   },
   methods: {
     onCouponApplied(couponCodeData){ // couponCodeData 是從子物件emit傳出來的資料
       this.couponResult = couponCodeData[0] + ' was applied! ' + couponCodeData[1]
+      this.showCouponDetail = true
     }
   }
 });
 // component sample: event dispatcher
+
+
+var component6 = new Vue({
+  el: '#component-event-dispatcher',
+  data: {
+  },
+  methods: {
+  }
+});

@@ -32,7 +32,28 @@
   <hr>
   <h3>Component - Modal</h3>
   <div id="component-modal">
-
+    <!-- 有個客製化的close event由 modal 這個component在按下按鈕時發射出來 close event -->
+    <modal v-show="isModalVisible" @close="hideModal">
+      <!-- 透過modal內的 <slot></slot>來顯示 -->
+      <p>I have a pen. I have an apple. Um ~ Apple Pen. I have a pineapple. I have a pen. Um ~ Pineapple Pen. Apple Pen, Pineapple Pen, Um ~ Pen Pineapple Apple Pen</p>
+    </modal>
+    <button @click="showModal">show modal</button>
+  </div>
+  <hr>
+  <h3>Component - Tabs</h3>
+  <div id="component-tabs">
+    <tabs>
+      <tab name="About Us" :selected="true"><p>Us Us Us Us Us</p></tab>
+      <tab name="About Culture"><p>Culture Culture Culture Culture Culture</p></tab>
+      <tab name="About Vision"><p>Vision Vision Vision Vision Vision</p></tab>
+    </tabs>
+  </div>
+  <hr>
+  <h3>Component - Customer Event</h3>
+  <div id="component-custom-event">
+    <!-- v-on:applied 或 @applied 是用來母子物件溝通的 -->
+    <coupon @coupon-was-applied="onCouponApplied"></coupon>
+    <p>{{ couponResult }}</p>
   </div>
   <script type="text/javascript" src="js/vue_component.js"></script>
 </body>

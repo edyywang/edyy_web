@@ -52,6 +52,7 @@
   <hr>
   <div id="app-6">
     <p>this is {{ message }}</p>
+    // v-model通常用在input內做雙向綁定的
     <input type="text" v-model="message">
   </div>
   <hr>
@@ -84,7 +85,7 @@
       <li v-for="task in incompletedTasks">{{ task.description }}</li>
     </ul>
   </div>
-  <!-- Vue js -->
+  <!-- custom Vue js MUST be at BOTTOM!!-->
   <script type="text/javascript" src="js/vue_home.js"></script>
 </body>
 </html>

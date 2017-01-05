@@ -37,6 +37,7 @@ var app5 = new Vue({
   },
   methods: {
     reverseMessage: function(){
+      // 記得要加入 this.xxx = yyy  是有指定本身this. 與 等於= 的
       this.message = this.message.split(' ').reverse().join(' ')
     }
   }
@@ -85,7 +86,8 @@ var app8 = new Vue({
     },
     incompletedTasks(){
       return this.tasks.filter(task => !task.completed); //ES5以上寫法
-      //或傳統寫法
+      // 或另一種function就是 this.tasks.forEach(item => console.log(task.someAttribute));
+      //或傳統語法
       // this.tasks.filter(function(task) {
       //   return !task.completed
       // })
@@ -107,28 +109,28 @@ var app8 = new Vue({
     }
   },
   // insatnce lifecycle action
-  beforeCreate: function(){
+  beforeCreate() {
     //alert('beforeCreate');
   },
-  created: function(){
+  created() {
     //alert('created');
   },
-  beforeMount: function(){
+  beforeMount() {
     //alert('beforeMount');
   },
-  mounted: function(){
+  mounted() {
     //alert('mounted');
   },
-  beforeUpdate: function(){
+  beforeUpdate() {
     //alert('beforeUpdate');
   },
-  updated: function(){
+  updated() {
     //alert('updated');
   },
-  beforeDestroy: function(){
+  beforeDestroy() {
     //alert('beforeDestroy');
   },
-  destroyed: function(){
+  destroyed() {
     //alert('destroyed');
   }
 });

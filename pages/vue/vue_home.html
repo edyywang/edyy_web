@@ -5,35 +5,38 @@
   <title>test Vue JS</title>
   <!-- javascript library jQuery 30kb Vue 27kb Axios 5kb Lodash 26kb-->
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>  -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script> <!-- Vue 27kb -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.js"></script> <!-- Vue 27kb -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script> -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script> -->
+  <style type="text/css">
+    .list-class { color: blue }
+  </style>
 </head>
 <body>
   <h1><a href="https://cn.vuejs.org/v2/guide/index.html">Vue JS 介紹</a></h1><br>
-  <div id="app" style="border-color:#aaaaee;border-width:3px;border-style:solid;padding:5px;"> <!-- 複雜的客製化DOM範例 -->
+  <div id="app"> <!-- 複雜的客製化DOM範例 -->
     <app-nav></app-nav>
     <app-view>
       <app-sidebar></app-sidebar>
       <app-content></app-content>
     </app-view>
   </div>
-  <br>
-  <div id="app-1" style="border-color:#aaaaee;border-width:3px;border-style:solid;padding:5px;">
+  <hr>
+  <div id="app-1">
     {{ message }}
   </div>
-  <br>
-  <div id="app-2" style="border-color:#aaaaee;border-width:3px;border-style:solid;padding:5px;">
+  <hr>
+  <div id="app-2">
     <span v-bind:title="message"> <!-- 使用v-bind綁定DOM屬性 -->
       Hover your mouse over for few seconds and dynamically bound title!
     </span>
   </div>
-  <br>
-  <div id="app-3" style="border-color:#aaaaee;border-width:3px;border-style:solid;padding:5px;"> <!-- 使用v-if判斷 -->
+  <hr>
+  <div id="app-3"> <!-- 使用v-if判斷 -->
     <p v-if="seen">Now you see me</p>
   </div>
-  <br>
-  <div id="app-4" style="border-color:#aaaaee;border-width:3px;border-style:solid;padding:5px;">
+  <hr>
+  <div id="app-4">
     <p>To-Do List</p>
     <ul>
       <li v-for="todo in todos"> <!-- 使用v-for迴圈 xyz in xyzs -->
@@ -41,23 +44,47 @@
       </li>
     </ul>
   </div>
-  <br>
-  <div id="app-5" style="border-color:#aaaaee;border-width:3px;border-style:solid;padding:5px;">
+  <hr>
+  <div id="app-5">
     <p>{{ message }}</p>
     <button v-on:click="reverseMessage">Reverse Message</button>
   </div>
-  <br>
-  <div id="app-6" style="border-color:#aaaaee;border-width:3px;border-style:solid;padding:5px;">
+  <hr>
+  <div id="app-6">
     <p>this is {{ message }}</p>
     <input type="text" v-model="message">
   </div>
-  <br>
-  <div id="app-7" style="border-color:#aaaaee;border-width:3px;border-style:solid;padding:5px;">
+  <hr>
+  <div id="app-7">
     <ol>
       <todo-item v-for="item in groceryList" v-bind:todoitem="item"></todo-item>
     </ol>
   </div>
-  <br>
+  <hr>
+  <div id="app-8">
+    <h3>List of Names</h3>
+    <ul>
+      <!-- v-bind:class 等於 :class -->
+      <li v-for="name in names" :class="{ 'list-class': toggleClass }">{{ name }}</li>
+    </ul>
+    <!-- v-model來綁住輸入的資料欄位 -->
+    <input type="text" id="input" v-model="newName">
+    <!-- v-on:click 或 v-on:KeyUp來綁住按鈕動作 -->
+    <button v-on:click="addNameOldStyle" v-bind:title="title">add Name Old Style</button>
+    <!-- 使用@來代替v-on 以及 使用:來代替 v-bind -->
+    <button @click="addNameNewStyle" :title="title">add Name New Style</button>
+    <p>reverse new name is {{reverseName}}</p>
+    <hr>
+    <h3>All Tasks</h3>
+    <ul>
+      <li v-for="task in tasks">{{ task.description }}</li>
+    </ul>
+    <h3>Incompleted Tasks</h3>
+    <ul>
+      <li v-for="task in incompletedTasks">{{ task.description }}</li>
+    </ul>
+  </div>
+  <!-- Vue js -->
   <script type="text/javascript" src="js/vue_home.js"></script>
 </body>
 </html>

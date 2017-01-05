@@ -63,3 +63,72 @@ var app7 = new Vue({
     ]
   }
 });
+// app-8
+var app8 = new Vue({
+  el: '#app-8',
+  data: {
+    title: 'click me Old',
+    newName: '',
+    names: ['Alpha', 'Beta', 'Charlie', 'Delta'],
+    toggleClass: false,
+    tasks: [
+      { description: 'task 1 completed', completed: true },
+      { description: 'task 2 incompleted', completed: false },
+      { description: 'task 1 completed', completed: true },
+      { description: 'task 4 incompleted', completed: false },
+    ]
+  },
+  // custom real-time data processing or filter
+  computed: {
+    reverseName() {
+      return this.newName.split(' ').reverse().join(' ');
+    },
+    incompletedTasks(){
+      return this.tasks.filter(task => !task.completed); //ES5以上寫法
+      //或傳統寫法
+      // this.tasks.filter(function(task) {
+      //   return !task.completed
+      // })
+    }
+  },
+  // custom omethods, eg. for on click
+  methods: {
+    addNameOldStyle: function(){ // better compatibility
+      if (this.newName === '') return
+      this.names.push(this.newName)
+      this.newName = ''
+      this.toggleClass = !this.toggleClass
+    },
+    addNameNewStyle() { // ES5 syntax
+      if (this.newName === '') return
+      this.names.push(this.newName)
+      this.newName = ''
+      this.toggleClass = !this.toggleClass
+    }
+  },
+  // insatnce lifecycle action
+  beforeCreate: function(){
+    //alert('beforeCreate');
+  },
+  created: function(){
+    //alert('created');
+  },
+  beforeMount: function(){
+    //alert('beforeMount');
+  },
+  mounted: function(){
+    //alert('mounted');
+  },
+  beforeUpdate: function(){
+    //alert('beforeUpdate');
+  },
+  updated: function(){
+    //alert('updated');
+  },
+  beforeDestroy: function(){
+    //alert('beforeDestroy');
+  },
+  destroyed: function(){
+    //alert('destroyed');
+  }
+});

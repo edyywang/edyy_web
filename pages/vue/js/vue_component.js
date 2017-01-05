@@ -215,7 +215,7 @@ var component4 = new Vue({
   methods: {
   }
 });
-// component sample: custom events
+// component sample: custom events and emit
 // 參考子物件emit資料到父instance的方法
 // https://laracasts.com/discuss/channels/vue/how-to-catch-a-childs-emit-in-the-parent-with-vue?page=1
 Vue.component('coupon', {
@@ -235,7 +235,7 @@ Vue.component('coupon', {
   }
 });
 var component5 = new Vue({
-  el: '#component-custom-event',
+  el: '#component-custom-event-emit',
   data: {
     couponResult: '',
     showCouponDetail: false

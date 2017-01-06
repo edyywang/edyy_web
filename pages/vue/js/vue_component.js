@@ -184,6 +184,8 @@ Vue.component('tabs', {
 // 在console中測試 $vm0.$children.forEach(tab => console.log(tab.name))
 Vue.component('tab', {
   // 類似setter
+  // 參考props validation 也能傳送物件
+  // https://vuejs.org/v2/guide/components.html#Prop-Validation
   props: {
     name: { required: true }, //這個元素中會有一個name的屬性, 而且是必要的
     selected: { default: false } //預設值為false, 作為顯示資料的判斷值
@@ -430,7 +432,50 @@ var component8 = new Vue({
 // 同型Component之間的傳送 Same Type Sibling Component Event Exchange by Listener
 Vue.component('poker-player', {
   props: {
-    name: { required: true }
+    name: { required: true },
+    number: { required: true }
+  },
+  data(){
+    return {
+      exchangedCard: '',
+      receivedCard: '',
+      status: ''
+    }
+  },
+  template: `
+    <div style="margin: 10px; padding: 10px; border: 1px; border-style: dotted; border-color: #ff0000;">
+      <p>Poker Player Name: {{ name }}</p>
+      <p>Poker Player Number: {{ number }}</p>
+      <input type="text" placeholder="exchange a card" @blur="exchangeCard" v-model="exchangedCard">
+      <p>Exchanged Card: {{ exchangedCard }}<span></p>
+      <p>Catched Message through Component Listener: {{receivedCard}}</p>
+    </div>
+  `,
+  methods: {
+    exchangeCard(){
+      Event.$emit('exchange-card', [this.number, this.exchangedCard]);
+    }
+  },
+  computed: {
+    shouldReceiveFrom() {
+      if (this.number === "1") {
+        return "4";
+      } else if (this.number === "2") {
+        return "1";
+      } else if (this.number === "3") {
+        return "2";
+      } else {  // this.number === "4"
+        return "3";
+      }
+    }
+  },
+  created() {
+    var _this = this;
+    Event.$on('exchange-card', function(data){
+      if (data[0] === _this.shouldReceiveFrom) {
+        _this.receivedCard = data[1];
+      }
+    });
   }
 });
 var component9 = new Vue({

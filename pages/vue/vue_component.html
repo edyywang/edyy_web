@@ -49,7 +49,7 @@
     </tabs>
   </div>
   <hr>
-  <h3>Component - Customer Event and Emit</h3>
+  <h3>Component - Customer Event and Emit (child to parent, 但應該要用v-on:custom-event:"someMethod"的方式)</h3>
   <div id="component-custom-event-emit">
     <!-- v-on:applied 或 @applied 是用來母子物件溝通的 -->
     <!-- custom event叫做 coupon-was-applied 被子物件呼叫觸發後, 呼叫父instance的方法 -->
@@ -60,8 +60,28 @@
   <hr>
   <h3>Component - Event Dispatcher</h3>
   <div id="component-event-dispatcher">
-
+    <ball></ball>
+    <p>Ball Data: {{ ballData }}</p>
   </div>
+  <hr>
+  <h3>Component - Two Components Event Dispatcher through Parent (parent-child communication)</h3>
+  <div id="component-event-dispatch-two-components-through-parent">
+    <player-pitcher position="picther" @pitcher-throw-message="receivePitcherMessage"><span>{{catchMessageTextFromCatcher}}</span></player-pitcher>
+    <player-catcher position="catcher" @catcher-throw-message="receiveCatcherMessage"><span>{{catchMessageTextFromPicther}}</span></player-catcher>
+  </div>
+  <hr>
+  <h3>Component - Two Sibling Component Event Dispatcher through Event Bus (sibling communication)</h3>
+  <div id="component-event-dispatch-sibiling-components">
+    <brother name="Bob"></brother>
+    <sister name="Amy"><span>{{text}}</span></sister>
+  </div>
+  <hr>
+  <h3>Same Type Sibling Component Event Exchange by Listener</h3>
+  <div id="same-type-sibling-component-event-exchange-by-listener">
+    <poker-player name="Jack"></poker-player>
+    <poker-player name="Rose"></poker-player>
+  </div>
+  <hr>
   <script type="text/javascript" src="js/vue_component.js"></script>
 </body>
 </html>

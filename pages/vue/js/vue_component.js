@@ -129,7 +129,7 @@ Vue.component('modal', {
     <button class="modal-close" @click="$emit('close')"></button>
   </div>
   `,
-  // 在template中的modal template, 會在按鈕下去時發射emit出一個close event到上一層
+  // 在template中的modal template, 會在按鈕下去時發射emit出一個Customer的close event到上一層
   methods: {}
 });
 var component3 = new Vue({  //永遠需要將DOM mount上Vue物件, 才能讓DOM與Vue做雙向binding
@@ -223,10 +223,10 @@ Vue.component('coupon', {
     return { couponCodeData: '' } //物件自己bind自己的資料, 用data為setter, 不需要設定props
   },
   template: `
-    <input type="text" placeholder="Enter your coupon code" @blur="onCouponApplied" v-model="couponCodeData">
+    <input type="text" placeholder="Enter your coupon code" @blur="onCouponAppliedHere" v-model="couponCodeData">
   `,
   methods: {
-    onCouponApplied(){
+    onCouponAppliedHere(){
       //發射event上一層去時就要使用$emit 並且可以傳送一個物件
       //發射一個custom event叫做 coupon-was-applied到DOM去 (標準的event有像是click或是keyup)
       //在$emit客製化event時, 也能傳送一組arrry的資料, 會bind到父instance的方法去
@@ -241,19 +241,198 @@ var component5 = new Vue({
     showCouponDetail: false
   },
   methods: {
-    onCouponApplied(couponCodeData){ // couponCodeData 是從子物件emit傳出來的資料
-      this.couponResult = couponCodeData[0] + ' was applied! ' + couponCodeData[1]
+    onCouponApplied(data){ // couponCodeData 是從子物件emit傳出來的資料
+      this.couponResult = data[0] + ' was applied! ' + data[1]
       this.showCouponDetail = true
     }
   }
 });
-// component sample: event dispatcher
 
+// Component - Customer Event and Emit (child to parent, 但應該要用v-on:custom-event:"someMethod"的方式)
+// !!! 這一個範例不適當 !!!! 無法使用只能當錯誤範例解說!!!!!
+// 適合兩個物件之間溝通的
+// shared Event instance between Components
+// 文件有寫 https://vuejs.org/v2/guide/components.html
+// You cannot use $on to listen to events emitted by children.
+// You must use v-on directly in the template, as in the example below.
+// 只能在template中用v:on 方式去接
+window.Event = new Vue();
+// there will be two components sending data to each others
+Vue.component('ball', {
+  data(){
+    return { inputData: '' } //物件自己bind自己的資料, 用data為setter, 不需要設定props
+  },
+  template: `
+    <input type="text" placeholder="Enter your ball data" @blur="onBallApplied" v-model="inputData">
+  `,
+  methods: {
+    onBallApplied(){
+      // 物件發射到另一個物件用emit
+      // this.$emit('data-was-input', function(){});
+      // 物件監聽到另一個物件送過來的用on
+      // this.$on('data-was-input', function(){});
 
+      // 會用一個公用的Event來傳送與監聽
+      Event.$emit('data-was-input', [this.inputData, 'xyz']);
+    }
+  }
+});
 var component6 = new Vue({
   el: '#component-event-dispatcher',
   data: {
+    ballData: 'original text',
+    testProp: {}
   },
   methods: {
+  },
+  created(){
+    // 因為這是母子component, 必須要在template中用 v-on:data-was-input="xxxMethod的方式"
+    // 而無法用event方式將子資料送到母
+    Event.$on('data-was-input', function(data){
+      // alert('first data is ' + data[0] + ' and second data is ' + data[1])
+      data = 'first data is ' + data[0] + ' and second data is ' + data[1]
+      console.log(data);
+    });
   }
+});
+// Component - Two Components Event Dispatcher through Parent (parent-child communication)
+// 要使用 v-on:custom-event:"someMethod"
+// 兩個一樣的component資料互相傳遞, 例如兩個棒球員在場上不同位置, 互相傳球 (但透過母子傳遞)
+Vue.component('player-pitcher', {
+  props: { position: { required: true } }, //資料初始化setter, 只能透過methods去修改, 透過data return去取用
+  data() {
+    return {
+      throwMessageText: ''
+    }
+  },
+  template: `
+    <div style="margin: 10px; padding: 10px; border: 1px; border-style: dotted; border-color: #ff0000;">
+      <p>Player Position: {{ position }}</p>
+      <input type="text" placeholder="input your message!!" @blur="throwMessage" v-model="throwMessageText">
+      <p>Throw Message: {{ throwMessageText }}</p>
+      <p>Catched Message: <slot></slot></p>
+    </div>
+  `,
+  methods: {
+    throwMessage(){
+      this.$emit('pitcher-throw-message', [this.position, this.throwMessageText]);
+    }
+  },
+  created() {
+  }
+});
+Vue.component('player-catcher', {
+  props: { position: { required: true } }, //資料初始化setter, 只能透過methods去修改, 透過data return去取用
+  data() {
+    return {
+      throwMessageText: ''
+    }
+  },
+  template: `
+    <div style="margin: 10px; padding: 10px; border: 1px; border-style: dotted; border-color: #ff0000;">
+      <p>Player Position: {{ position }}</p>
+      <input type="text" placeholder="input your message!!" @blur="throwMessage" v-model="throwMessageText">
+      <p>Throw Message: {{ throwMessageText }}</p>
+      <p>Catched Message: <slot></slot></p>
+    </div>
+  `,
+  methods: {
+    throwMessage(){
+      this.$emit('catcher-throw-message', [this.position, this.throwMessageText]);
+    }
+  },
+  created() {
+  }
+});
+var component7 = new Vue({
+  el: '#component-event-dispatch-two-components-through-parent', //忘了加 # 的話就找不到component 因為是透過id去找的 要加入 #
+  data: {
+    catchMessageTextFromCatcher: '',
+    catchMessageTextFromPicther: ''
+  },
+  methods: {
+    receivePitcherMessage(msg){
+      this.catchMessageTextFromPicther = 'receved message: ' + msg[1] + ' from ' + msg[0]
+    },
+    receiveCatcherMessage(msg){
+      this.catchMessageTextFromCatcher = 'receved message: ' + msg[1] + ' from ' + msg[0]
+    }
+  },
+  created(){
+    // eventBus.$on('pitcher-throw-message', function(data){
+    //   this.catchMessageText = 'catch message from pitcher: ' + data[1] + ' from player: ' + data[0]
+    //   console.log('catched')
+    // });
+    // eventBus.$on('catcher-throw-message', function(data){
+    //   this.catchMessageText = 'catch message from catcher: ' + data[1] + ' from player: ' + data[0]
+    // });
+  }
+});
+// Component - Two Sibling Component Event Dispatcher through Event Bus (sibling communication)
+// 有兩種方式 by Listener or by parent instance data
+// 參考 https://forum-archive.vuejs.org/topic/130/watch-prop-changes-from-inside-a-component/5
+// 另一種方式參考 store vs. shared state 但這個寫得不太一樣 但沒有試驗過 https://vuejs.org/v2/guide/state-management.html
+Vue.component('brother', {
+  props: { name: { required: true } }, //資料初始化setter, 只能透過methods去修改, 透過data return去取用
+  data() {
+    return {
+      throwMessageText: ''
+    }
+  },
+  template: `
+    <div style="margin: 10px; padding: 10px; border: 1px; border-style: dotted; border-color: #ff0000;">
+      <p>Brother Name: {{ name }}</p>
+      <input type="text" placeholder="input your message!!" @blur="throwMessage" v-model="throwMessageText">
+      <p>Throw Message: {{ throwMessageText }}</p>
+    </div>
+  `,
+  methods: {
+    throwMessage(){
+      data = this.name + ' says ' + this.throwMessageText
+      Event.$emit('brother-throw-message', data);
+    }
+  }
+});
+Vue.component('sister', {
+  props: {
+    name: { required: true }
+  }, //資料初始化setter, 只能透過methods去修改, 透過data return去取用
+  data() {
+    return {
+      receivedMessage: '' //方法一的物件資料準備直接被更新
+    }
+  },
+  template: `
+    <div style="margin: 10px; padding: 10px; border: 1px; border-style: dotted; border-color: #ff0000;">
+      <p>Sister Name: {{ name }}</p>
+      <p>方法一 Catched Message through Component Listener: {{receivedMessage}}</p>
+      <p>方法二 Catched Message through Parent: <slot></slot></p>
+    </div>
+  `,
+  methods: {
+  },
+  created() {
+    //都是用listener的方式, 有兩種方式
+    var _this = this; //用一個去接
+    Event.$on('brother-throw-message', function(data){
+      _this.receivedMessage = data;  //方法一: 用直接更新Component資料的方式, 比較乾淨
+      component8.text = data //方法二: 用parent instance data 的轉傳方式
+    });
+  }
+});
+var component8 = new Vue({
+  el: '#component-event-dispatch-sibiling-components',
+  data: {
+    text: 'original' //為了給方法二做中轉用的資料
+  }
+});
+
+// 同型Component之間的傳送 Same Type Sibling Component Event Exchange by Listener
+Vue.component('poker-player', {
+  props: {
+    name: { required: true }
+  }
+});
+var component9 = new Vue({
+  el: '#same-type-sibling-component-event-exchange-by-listener',
 });

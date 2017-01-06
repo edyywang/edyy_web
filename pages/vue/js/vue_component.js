@@ -132,7 +132,7 @@ Vue.component('modal', {
   // 在template中的modal template, 會在按鈕下去時發射emit出一個Customer的close event到上一層
   methods: {}
 });
-var component3 = new Vue({  //永遠需要將DOM mount上Vue物件, 才能讓DOM與Vue做雙向binding
+var component3_1 = new Vue({  //永遠需要將DOM mount上Vue物件, 才能讓DOM與Vue做雙向binding
   el: '#component-modal',
   data: {
     isModalVisible: false
@@ -147,6 +147,48 @@ var component3 = new Vue({  //永遠需要將DOM mount上Vue物件, 才能讓DOM
     }
   }
 });
+// component sample: modal card & Name Slot
+Vue.component('modal-card', {
+  props: [],
+  data() { return{}; },
+  template: `
+  <div class="modal is-active">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title"><slot name="modal-title">default title is here</slot></p>
+      <button class="delete" @click="$emit('close')"></button>
+    </header>
+    <section class="modal-card-body">
+      <slot name="modal-content">defatul content is here</slot>
+    </section>
+    <footer class="modal-card-foot">
+      <a class="button is-primary">Save changes</a>
+      <a class="button" @click="$emit('close')">Cancel</a>
+    </footer>
+  </div>
+</div>
+
+  `,
+  // 在template中的modal template, 會在按鈕下去時發射emit出一個Customer的close event到上一層
+  methods: {}
+});
+var component3_2 = new Vue({  //永遠需要將DOM mount上Vue物件, 才能讓DOM與Vue做雙向binding
+  el: '#component-modal-card',
+  data: {
+    isModalVisible: false
+  },
+  methods: {
+    showModal() {
+      // 記得要加入 this.xxx = yyy
+      this.isModalVisible = true
+    },
+    hideModal() {
+      this.isModalVisible = false
+    }
+  }
+});
+
 // component sample: tabs
 Vue.component('tabs', {
   props: [],

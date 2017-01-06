@@ -19,6 +19,7 @@
 <body>
   <a href="https://laracasts.com/series/learn-vue-2-step-by-step/episodes/7?autoplay=true">Vue Components</a>
   <h3>Components</h3>
+  <hr>
   <div id="component-1">
     <p>{{ message }}</p>
     <task-list></task-list>
@@ -39,6 +40,29 @@
     </modal>
     <button @click="showModal">show modal</button>
   </div>
+  <hr>
+  <h3>Component - Modal Card</h3>
+  <div id="component-modal-card">
+    <div style="margin: 10px; padding: 10px; border: 1px; border-style: dotted; border-color: #ff0000;">
+      <modal-card v-show="isModalVisible" @close="hideModal">
+        <!-- 透過modal內的 <slot></slot>來顯示 -->
+        <!-- Name Slot的用法就是在一個tag內 slot="xxx" 對照到物件內template的<slot name="xxx"> -->
+        <div slot="modal-title">Model Title is Here ~ Name Slot works!</div>
+        <p slot="modal-content">I have a pen. I have an apple. Um ~ Apple Pen. I have a pineapple. I have a pen. Um ~ Pineapple Pen. Apple Pen, Pineapple Pen, Um ~ Pen Pineapple Apple Pen</p>
+      </modal-card>
+      <button @click="showModal">show modal with slot data</button>
+    </div>
+    <div style="margin: 10px; padding: 10px; border: 1px; border-style: dotted; border-color: #ff0000;">
+      <modal-card v-show="isModalVisible" @close="hideModal">
+        <!-- 故意不輸入slot時, 會顯示template內slow的預設資料值 -->
+      </modal-card>
+      <button @click="showModal">show modal but no slot data, will show default</button>
+    </div>
+  </div>
+  <hr>
+  <!-- 另外一種方式是inline template -->
+  <h3>在Component內 加入一個屬性 inline-template 的話 就能不用在Component定義中寫template 直接就是包裝內的DOM, 只讓Component處理資料</h3>
+  <p>但需要在inline template最外面包一個root element例如div</p>
   <hr>
   <h3>Component - Tabs</h3>
   <div id="component-tabs">

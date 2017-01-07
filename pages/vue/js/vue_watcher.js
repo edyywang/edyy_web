@@ -23,8 +23,7 @@ var watchExampleVM1 = new Vue({
     // finished typing before making the ajax request. To learn
     // more about the _.debounce function (and its cousin
     // _.throttle), visit: https://lodash.com/docs#debounce
-    getAnswer: _.debounce(
-      function (newQuestion) {
+    getAnswer: _.debounce(function (newQuestion) {
         var vm = this
         if (this.question.indexOf('?') === -1) {
           vm.answer = 'Questions usually contain a question mark. ;-) Now you only type this: ' + newQuestion
@@ -43,10 +42,7 @@ var watchExampleVM1 = new Vue({
             vm.answer = 'Error! Could not reach the API. ' + error
             vm.image_src = '#'
           })
-      },
-      // This is the number of milliseconds we wait for the user to stop typing.
-      300
-    )
+      }, 300)
   }
 })
 // Example 2
@@ -63,24 +59,23 @@ var watchExampleVM2 = new Vue({
     }
   },
   methods: {
-    // _.debounce is a function provided by lodash to limit how
-    // often a particularly expensive operation can be run.
-    // In this case, we want to limit how often we access
-    // yesno.wtf/api, waiting until the user has completely
-    // finished typing before making the ajax request. To learn
-    // more about the _.debounce function (and its cousin
-    // _.throttle), visit: https://lodash.com/docs#debounce
-    getJoke: function () {
-        var vm = this
-        vm.joke = 'waiting for Chuck Norris...'
-        // Ajax to get API response
-        axios.get('https://api.chucknorris.io/jokes/random')
-          .then(function (response) {
-            vm.joke = response.data.value
-          })
-          .catch(function (error) {
-            vm.joke = 'Error! Could not reach the API. ' + error
-          })
-      }
+    newFunction() {
+      // do something
+    },
+    oldFunction: function() {
+      // do something
+    },
+    getJoke: _.debounce(function () {
+          var vm = this
+          vm.joke = 'waiting for Chuck Norris...'
+          // Ajax to get API response
+          axios.get('https://api.chucknorris.io/jokes/random')
+            .then(function (response) {
+              vm.joke = response.data.value
+            })
+            .catch(function (error) {
+              vm.joke = 'Error! Could not reach the API. ' + error
+            })
+    }, 100)
   }
 })

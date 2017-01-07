@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue Shared State</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.js"></script> <!-- Vue 27kb -->
+</head>
+<body>
+  <a href="https://laracasts.com/series/learn-vue-2-step-by-step/episodes/24">Vue Components</a>
+  <h3>Vue Shared State</h3>
+  <hr>
+  <!-- 要讓兩個不同component修改時, 共同影響到某個值 -->
+  <div id="shared-state-1">
+    <p>{{ shared.user.name }}</p>
+    <p>{{ foo1 }}</p>
+  </div>
+  <div id="shared-state-2">
+    <p>{{ shared.user.name }}</p>
+    <p>{{ foo2 }}</p>
+  </div>
+  <hr>
+  <script type="text/javascript" src="js/vue_shared_state.js"></script>
+</body>
+</html>

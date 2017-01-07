@@ -24,23 +24,23 @@ var watchExampleVM1 = new Vue({
     // more about the _.debounce function (and its cousin
     // _.throttle), visit: https://lodash.com/docs#debounce
     getAnswer: _.debounce(function (newQuestion) {
-        var vm = this
+        var _this = this
         if (this.question.indexOf('?') === -1) {
-          vm.answer = 'Questions usually contain a question mark. ;-) Now you only type this: ' + newQuestion
+          _this.answer = 'Questions usually contain a question mark. ;-) Now you only type this: ' + newQuestion
           return
         }
-        vm.answer = 'Thinking...'
-        vm.image_src = ''
+        _this.answer = 'Thinking...'
+        _this.image_src = ''
         // Ajax to get API response
         axios.get('https://yesno.wtf/api')
           .then(function (response) {
-            vm.show_question = true
-            vm.answer = _.capitalize(response.data.answer)
-            vm.image_src = response.data.image
+            _this.show_question = true
+            _this.answer = _.capitalize(response.data.answer)
+            _this.image_src = response.data.image
           })
           .catch(function (error) {
-            vm.answer = 'Error! Could not reach the API. ' + error
-            vm.image_src = '#'
+            _this.answer = 'Error! Could not reach the API. ' + error
+            _this.image_src = '#'
           })
       }, 300)
   }
@@ -66,15 +66,15 @@ var watchExampleVM2 = new Vue({
       // do something
     },
     getJoke: _.debounce(function () {
-          var vm = this
-          vm.joke = 'waiting for Chuck Norris...'
+          var _this = this
+          _this.joke = 'waiting for Chuck Norris...'
           // Ajax to get API response
           axios.get('https://api.chucknorris.io/jokes/random')
             .then(function (response) {
-              vm.joke = response.data.value
+              _this.joke = response.data.value
             })
             .catch(function (error) {
-              vm.joke = 'Error! Could not reach the API. ' + error
+              _this.joke = 'Error! Could not reach the API. ' + error
             })
     }, 100)
   }

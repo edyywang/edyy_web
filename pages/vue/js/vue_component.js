@@ -7,6 +7,7 @@
 //   data() { return{}; },
 //   // like processed getter
 //   computed: {},
+//   watch: {},
 //   template: `
 //   `,
 //   methods: {},
@@ -40,6 +41,9 @@
 // var componentExample = new Vue({
 //   el: '#component-example-to-some-div-tag',
 //   data: {
+//   },
+//   watch: {
+//
 //   },
 //   methods: {
 //   }

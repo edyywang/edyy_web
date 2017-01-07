@@ -8,7 +8,7 @@ var watchExampleVM1 = new Vue({
     image_src: ''
   },
   watch: {
-    // whenever question changes, this function will run
+    // whenever data field question changes, this function will run
     question: function (newQuestion) {
       this.show_question = false
       this.answer = 'Waiting for you to stop typing...now your question is' + newQuestion

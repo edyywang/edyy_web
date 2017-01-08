@@ -460,9 +460,12 @@ Vue.component('sister', {
   methods: {
   },
   created() {
-    //都是用listener的方式, 有兩種方式
-    var _this = this; //用一個去接, 會找到 this.someFunction.bind(this) { this.xxx } 的方式將this綁定在一起
+    // 用一個this去接自己
+    // 或會找到 this.someFunction.bind(this) { this.xxx } 的方式將this綁定在一起
+    // 參考 https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind
+    var _this = this;
     Event.$on('brother-throw-message', function(data){
+      //都是用listener的方式, 有兩種方式
       _this.receivedMessage = data;  //方法一: 用直接更新Component資料的方式, 比較乾淨
       component8.text = data //方法二: 用parent instance data 的轉傳方式
     });

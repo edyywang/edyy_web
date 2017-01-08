@@ -40,6 +40,9 @@
 // [for mounting DOM]
 // var componentExample = new Vue({
 //   el: '#component-example-to-some-div-tag',
+//   components: {
+//     // register child component
+//   },
 //   data: {
 //   },
 //   watch: {

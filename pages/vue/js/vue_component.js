@@ -463,6 +463,7 @@ Vue.component('sister', {
     // 用一個this去接自己
     // 或會找到 this.someFunction.bind(this) { this.xxx } 的方式將this綁定在一起
     // 參考 https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind
+    // 或用這個方式 bind(this) http://stackoverflow.com/questions/38064054/vue-js-global-event-bus
     var _this = this;
     Event.$on('brother-throw-message', function(data){
       //都是用listener的方式, 有兩種方式

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue Form</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style type="text/css">
+  </style>
+</head>
+<body>
+  <h3>Vue Form</h3>
+  <div id="form" class="form-group">
+    <!-- 有一些default event modifier的機制 -->
+    <!-- 類似@submit.prevent就不會做原來的form動作, 能透過method去打後台API與導向, 就能避免重新頁面request -->
+    <!-- 類似@submit.once就 -->
+    <!-- 參考 https://vuejs.org/v2/guide/events.html#Event-Modifiers -->
+    <form method="POST" action="/some_action" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
+      <div>
+        <label for="name" class="label label-primary">Project Name:</label>
+        <!-- 再輸入時Vue會打出$event.target.name動態的去觸發form內event -->
+        <input type="text" id="name" class="input" v-model="form.name">
+        <!-- 範例: 顯示某個errors物件內的資訊, 萬一輸入錯誤時要有提醒 但只有存在error field時才顯示這個span DOM -->
+        <span class="has-danger" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
+      </div>
+      <div>
+        <label for="description" class="label label-primary">Description</label>
+        <input type="text" id="description" class="input" v-model="form.description">
+        <!-- 範例: 顯示某個errors物件內的資訊, 萬一輸入錯誤時要有提醒 但只有存在error field時才顯示這個span DOM -->
+        <span class="has-danger" v-if="form.errors.has('description')" v-text="form.errors.get('description')"></span>
+      </div>
+      <div>
+        <!-- 當form的errors有錯誤資料時, 就讓按鈕disable -->
+        <!-- TODO: 也能多寫一個form的方法, 判斷當欄位必要欄位還沒輸入時, 以及有errors時按鈕disable -->
+        <button class="button is-primary" :disable="form.errors.any()">Create</button>
+      </div>
+    </form>
+  </div>
+  <!-- custom Vue js MUST be at BOTTOM!!-->
+  <script type="text/javascript" src="js/vue_form.js"></script>
+</body>
+</html>
